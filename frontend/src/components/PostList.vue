@@ -38,7 +38,7 @@ export default {
     showAuthor: {
       type: Boolean,
       required: false,
-      default: true,
+      default: false,
     },
   },
   computed: {

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'b*y86*da()&1-08^1(s&-s3$5t%*d%6-le#^hv2jau6xgs5ou('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ["127.0.0.1", 'localhost']
 
 
 # Application definition
@@ -40,11 +41,13 @@ INSTALLED_APPS = [
     'blog',
     'graphene_django',
     'corsheaders',
+    'whitenoise',
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 GRAPHENE = {
     "SCHEMA": "blog.schema.schema",
@@ -129,3 +133,4 @@ GRAPHENE = {
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = ("http://localhost:8080",)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
