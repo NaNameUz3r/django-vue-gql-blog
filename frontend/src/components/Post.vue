@@ -3,11 +3,14 @@
       <h2>{{ post.title }}: {{ post.subtitle }}</h2>
       By <AuthorLink :author="post.author" />
       <div>{{ displayableDate(post.publishDate) }}</div>
+      <img :src="post.headerimage">
     <p class="post__description">{{ post.metaDescription }}</p>
-    <article>
-      {{ post.body }} 
+    <!-- <article v-html="post.body"> -->
+    <article class="post-article">
+      <!-- {{ post.body }}  -->
+      <vue-markdown :source="post.body"> </vue-markdown>
     </article>
-    <ul>
+    <ul class="post-tags-list">
       <li class="post__tags" v-for="tag in post.tags" :key="tag.name">
         <router-link :to="`/tag/${tag.name}`">#{{ tag.name }}</router-link>
       </li>
@@ -17,12 +20,15 @@
 
 <script>
 import AuthorLink from '@/components/AuthorLink'
+
 import gql from 'graphql-tag'
+import VueMarkdown from 'vue-markdown-render'
 
 export default {
   name: 'Post',
   components: {
     AuthorLink,
+    VueMarkdown,
   },
   data () {
     return {
@@ -42,6 +48,7 @@ export default {
         query: gql`query ($slug: String!) {
           postBySlug(slug: $slug) {
             title
+            headerImage
             subtitle
             publishDate
             metaDescription
@@ -68,3 +75,14 @@ export default {
 
 }
 </script>
+
+
+<style>
+.post-article img {
+  max-width: 30vw;
+  min-width: 300px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+</style>

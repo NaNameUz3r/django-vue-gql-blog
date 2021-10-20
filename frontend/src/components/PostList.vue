@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ol class="post-list">
-      <li class="post" v-for="post in publishedPosts" :key="post.title">
-          <span class="post__title">
+    <ol class="post-list card-body">
+      <li class="post card border-dark mb-3" v-for="post in publishedPosts" :key="post.title">
+          <span class="card-header">
             <router-link
               :to="`/post/${post.slug}`"
             >{{ post.title }}: {{ post.subtitle }}</router-link>
@@ -10,10 +10,10 @@
           <span v-if="showAuthor">
             by <AuthorLink :author="post.author" />
           </span>
-          <div class="post__date">{{ displayableDate(post.publishDate) }}</div>
-        <p class="post__description">{{ post.metaDescription }}</p>
+          <div class="post__date card-subtitle mb-2 text-muted">{{ displayableDate(post.publishDate) }}</div>
+        <p class="post__description card-body">{{ post.metaDescription }}</p>
         <ul>
-          <li class="post__tags" v-for="tag in post.tags" :key="tag.name">
+          <li class="post__tags badge bg-light" v-for="tag in post.tags" :key="tag.name">
             <router-link :to="`/tag/${tag.name}`">#{{ tag.name }}</router-link>
           </li>
         </ul>
@@ -59,22 +59,26 @@ export default {
 
 
 <style>
+.post__date {
+  padding-left: 2.5%;
+  padding-top: 2%;
+  font-size: 0.70rem;
+}
 .post-list {
   list-style: none;
 }
 
 .post {
-  border-bottom: 1px solid #ccc;
   padding-bottom: 1rem;
 }
 
 .post__title {
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 .post__description {
   color: #777;
-  font-style: italic;
+
 }
 
 .post__tags {

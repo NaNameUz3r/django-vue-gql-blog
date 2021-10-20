@@ -1,8 +1,8 @@
 <template>
     <div id="app">
-        <header>
+        <header class="navbar navbar-expand-lg navbar-dark bg-primary">
           <router-link to="/">
-            <h1>Wannahack Home</h1>
+            <h1 class="navbar-brand">Wannahack.in</h1>
           </router-link>
         </header>
         <router-view />
@@ -15,23 +15,4 @@ export default {
 }
 </script>
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-}
 
-body {
-  margin: 0;
-  padding: 1.5rem;
-}
-
-* + * {
-  margin-top: 1.5rem;
-}
-
-#app {
-  margin: 0;
-  padding: 0;
-}
-</style>

@@ -11,22 +11,20 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import os
+from os import getenv, environ, path
+from distutils.util import strtobool
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'b*y86*da()&1-08^1(s&-s3$5t%*d%6-le#^hv2jau6xgs5ou('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = getenv("DEBUG", default=False)
 
-# ALLOWED_HOSTS = ["127.0.0.1", 'localhost']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -78,7 +76,6 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -86,6 +83,20 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": getenv("POSTGRES_NAME", "postgres"),
+#         "USER": getenv("POSTGRES_USER", "postgres"),
+#         "PASSWORD": getenv("POSTGRES_PASSWORD", "postgres"),
+#         "HOST": getenv("POSTGRES_HOST", "db"),
+#         "PORT": getenv("POSTGRES_PORT", "5432"),
+#         "CONN_MAX_AGE": 600,
+#     }
+# }
+
+
 
 
 # Password validation
@@ -125,7 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = path.join(BASE_DIR, 'staticfiles')
 
 GRAPHENE = {
     "SCHEMA": "blog.schema.schema",

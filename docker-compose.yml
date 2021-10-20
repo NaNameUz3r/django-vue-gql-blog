@@ -1,0 +1,61 @@
+version: '3.7'
+services:
+  # nginx:
+  #   build:
+  #     context: ./nginx
+  #     cache_from: ["registry.gitlab.idacloud.ru/idaproject/akvilon/akvilon/nginx:${CACHE_FROM_TAG:-latest}"]
+  #   restart: always
+  #   depends_on:
+  #     - backend
+  #   volumes:
+  #     - static:/var/www/static/:delegated
+  #     - images:/var/www/images/:delegated
+  #   environment:
+  #     - ENVIRONMENT=production
+  #     - SITE_HOST
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   logging:
+  #     driver: journald
+  #     options:
+  #       tag: nginx
+
+  backend:
+    restart: always
+    build:
+      context: ./backend
+    entrypoint: sh /home/app/backend/entrypoint.sh
+    # command: python manage.py runserver
+    environment:
+      - DEBUG=False
+    depends_on:
+      - db
+    volumes:
+      - static:/app/staticfiles/:delegated
+      - images:/app/images/:delegated
+    logging:
+      driver: journald
+      options:
+        tag: backend
+
+  db:
+    image: postgres:12.3-alpine
+    restart: always
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+    ports:
+      - 127.0.0.1:5433:5432
+    environment:
+      - POSTGRES_PASSWORD postgres
+    command: postgres -c 'shared_buffers=256MB' -c 'work_mem=8MB'
+    logging:
+      driver: journald
+      options:
+        tag: db
+
+
+volumes:
+  postgresdata:
+  static:
+  images:
