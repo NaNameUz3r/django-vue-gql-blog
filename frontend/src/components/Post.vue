@@ -1,7 +1,6 @@
 <template>
   <div class="post" v-if="post">
       <h2>{{ post.title }}: {{ post.subtitle }}</h2>
-      By <AuthorLink :author="post.author" />
       <div>{{ displayableDate(post.publishDate) }}</div>
       <img :src="post.headerimage">
     <p class="post__description">{{ post.metaDescription }}</p>
@@ -19,7 +18,6 @@
 </template>
 
 <script>
-import AuthorLink from '@/components/AuthorLink'
 
 import gql from 'graphql-tag'
 import VueMarkdown from 'vue-markdown-render'
@@ -27,7 +25,6 @@ import VueMarkdown from 'vue-markdown-render'
 export default {
   name: 'Post',
   components: {
-    AuthorLink,
     VueMarkdown,
   },
   data () {

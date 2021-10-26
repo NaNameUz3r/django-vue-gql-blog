@@ -5,22 +5,22 @@
       :href="author.website"
       target="_blank"
       rel="noopener noreferrer"
-    >Website</a>
+    > Website</a>
     <p>{{ author.bio }}</p>
 
-    <h3>Posts by {{ displayName }}</h3>
-    <PostList :posts="author.postSet" :showAuthor="false" />
+    <!-- <h3>Posts by {{ displayName }}</h3>
+    <PostList :posts="author.postSet" :showAuthor="false" /> -->
   </div>
 </template>
 
 <script>
-import PostList from '@/components/PostList'
+// import PostList from '@/components/PostList'
 import gql from 'graphql-tag'
 
 export default {
   name: 'Author',
   components: {
-    PostList,
+    // PostList,
   },
   data () {
     return {

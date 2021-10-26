@@ -40,15 +40,15 @@ services:
         tag: backend
 
 
-  frontend:
-    restart: always
-    ports:
-      - "8080:8080"
-    build:
-      context: ./frontend
-    volumes:
-      - frontend:/var/www/frontend:delegated
-    command: http-server dist
+  # frontend:
+  #   restart: always
+  #   ports:
+  #     - "8080:8080"
+  #   build:
+  #     context: ./frontend
+  #   volumes:
+  #     - frontend:/var/www/frontend:delegated
+  #   command: http-server dist
 
 
   db:
