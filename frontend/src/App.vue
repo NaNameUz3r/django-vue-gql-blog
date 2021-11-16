@@ -4,7 +4,7 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
               <div class="container-fluid burger-container">
 
-                <router-link to="/">
+                <router-link to="/" class="router-link">
                 <a class="navbar-brand" href="#">Wannahack.In</a>
                 </router-link>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,18 +14,18 @@
                 <div class="navbar-collapse collapse" id="navbarColor01" style="">
                   <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                      <router-link to="/">
+                      <router-link to="/" class="router-link" >
                       <a class="nav-link" href="#">Последние посты
                       </a>
                       </router-link>
                     </li>
                     <li class="nav-item">
-                      <router-link to="/about">
+                      <router-link to="/about" class="router-link">
                       <a class="nav-link" href="#">Обо мне</a>
                       </router-link>
                     </li>
                     <li class="nav-item">
-                      <router-link to="/contacts">
+                      <router-link to="/contacts" class="router-link">
                       <a class="nav-link" href="#">Контакты</a>
                       </router-link>
                     </li>
@@ -34,6 +34,10 @@
               </div>
             </nav>
       </header>
+
+      <footer>
+        
+      </footer>
       <router-view />
     </div>
 </template>
@@ -47,6 +51,8 @@ export default {
 
 
 <style>
-
+.router-link {
+  text-decoration: none;
+}
 </style>
 

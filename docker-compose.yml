@@ -6,9 +6,9 @@ services:
     depends_on:
       - backend
     volumes:
-      - static:/var/www/static/:delegated
-      - images:/var/www/images/:delegated
-      - frontend:/var/www/frontend:delegated
+      - static:/var/www/static/:default
+      - images:/var/www/images/:default
+      - frontend:/var/www/frontend:default
     depends_on:
       - backend
     ports:
@@ -32,23 +32,25 @@ services:
     depends_on:
       - db
     volumes:
-      - static:/app/staticfiles/:delegated
-      - images:/app/images/:delegated
+      - static:/home/app/staticfiles/:default
+      - images:/home/app/images/:default
     logging:
       driver: journald
       options:
         tag: backend
 
 
-  # frontend:
-  #   restart: always
-  #   ports:
-  #     - "8080:8080"
-  #   build:
-  #     context: ./frontend
-  #   volumes:
-  #     - frontend:/var/www/frontend:delegated
-  #   command: http-server dist
+  frontend:
+    restart: always
+    ports:
+      - "8080:8080"
+    build:
+      context: ./frontend
+    volumes:
+      - frontend:/static/:default
+      - images:/app/public/images/:default
+    # command: http-server dist
+    command: npm run serve
 
 
   db:

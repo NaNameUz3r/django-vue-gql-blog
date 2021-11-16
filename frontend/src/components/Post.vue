@@ -1,8 +1,10 @@
 <template>
   <div class="post" v-if="post">
-      <h2>{{ post.title }}: {{ post.subtitle }}</h2>
-      <div>{{ displayableDate(post.publishDate) }}</div>
-      <img :src="post.headerimage">
+      <h2>{{ post.title }} </h2>
+      <h3>{{ post.subtitle }} </h3>
+      <div class="publish-date">{{ displayableDate(post.publishDate) }}</div>
+      <pre> {{  }} </pre>
+      <!-- <img :src="`/${post.headerImage}`" alt="Header Image" class="header-image"/> -->
     <p class="post__description">{{ post.metaDescription }}</p>
     <!-- <article v-html="post.body"> -->
     <article class="post-article">
@@ -76,10 +78,18 @@ export default {
 
 <style>
 .post-article img {
-  max-width: 30vw;
+  max-width: 25vw;
   min-width: 300px;
   height: auto;
   margin: 0 auto;
   display: block;
+}
+
+.header-image {
+  /* max-width: 30vw; */
+}
+
+.publish-date {
+  font-size: smaller;
 }
 </style>

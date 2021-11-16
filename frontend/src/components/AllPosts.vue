@@ -1,6 +1,6 @@
 <template>
-  <div class="postlist-header">
-    <h4>Недавно я написал:</h4>
+  <div class="posts-block">
+    <h4 class="postlist-header">Недавно я написал:</h4>
     <PostList v-if="allPosts" :posts="allPosts" />
   </div>
 </template>
@@ -24,6 +24,7 @@ export default {
       query: gql`query {
         allPosts {
           title
+          headerImage
           subtitle
           publishDate
           published
@@ -48,9 +49,13 @@ export default {
 </script>
 
 <style>
-h4 {
-  padding-top: 10px;
-  padding-left: 15px;
 
+
+.postlist-header {
+ padding-left: 32px;
+ padding-top: 10px;
+}
+
+.posts-block {
 }
 </style>
